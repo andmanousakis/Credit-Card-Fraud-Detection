@@ -103,6 +103,7 @@ dependencies:
     - seaborn==0.11.2
     - send2trash==1.8.0
     - six==1.16.0
+    - sklearn==0.0
     - smmap==4.0.0
     - streamlit==0.88.0
     - terminado==0.12.1
