@@ -1,11 +1,14 @@
 # Dependencies.
 import numpy as np
 import pandas as pd
-#from sklearn.model_selection import train_test_split
-#from sklearn.linear_model import LogisticRegression
-#from sklearn.metrics import accuracy_score
-#from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
+from sklearn.preprocessing import StandardScaler
 import streamlit as st
+import seaborn as sns
+from matplotlib import pyplot as plt
+#import matplotlib.pyplot as plt
 
 # Importing dataset.
 data = pd.read_csv('data.csv')
@@ -79,18 +82,53 @@ if navigation == 'Data Description & Cleaning':
     licit = data[data.Class == 0]
     illicit = data[data.Class == 1]
 
-    licit_col, illicit_col, comparison_col = st.columns((1, 1, 3))
+    licit_col, illicit_col = st.columns((1, 1))
 
-    licit_col.subheader('Licit Transactions')
-    licit_col.write(licit.Amount.describe())
+    licit_col.subheader('Licit Transactions Description')
+    licit = licit.drop('Time', axis = 1)
+    licit_col.write(licit.describe())
 
-    illicit_col.subheader('Illicit Transactions')
-    illicit_col.write(illicit.Amount.describe())
-
-    comparison_col.subheader('Comparison')
-    comparison_col.write(data.groupby('Class').mean())
+    illicit_col.subheader('Illicit Transactions Description')
+    illicit = illicit.drop('Time', axis = 1)
+    illicit_col.write(illicit.describe())
 
 elif navigation == 'Visualization':
 
-    # Plotting.
-    pass
+    # Separating data classes.
+    licit = data[data.Class == 0]
+    illicit = data[data.Class == 1]
+
+    # Pairplot.
+    st.subheader("Pairplots")
+    #licit = licit.sample(n = 492)
+    #sample_data = pd.concat([licit, illicit])
+    #fig = sns.pairplot(sample_data[features[1:]], hue = 'Class')
+    #plots_col1.pyplot(fig)
+    from PIL import Image
+    Image.MAX_IMAGE_PIXELS = 205977227
+    image = Image.open('pairplot.png')
+    st.image(image)
+
+    # Plots.
+    plots_col1, plots_col2 = st.columns((1, 1))
+   
+    plots_col1.subheader("Heatmap: Linear Correlations")
+    plots_col2.subheader("Heatmap: Non-linear Correlations")
+    
+    # Linear correlation using heatmap.
+    #fig = plt.figure(figsize = (35, 20))
+    #sns.heatmap(data[features[1:-1]].corr(), annot = True, cmap = "YlGnBu")
+    #plots_col2.pyplot(fig)
+    image = Image.open('linear_correlations_heatmap.png')
+    plots_col1.image(image)
+
+    # Non-linear Correlation testing with PPS.
+    import ppscore as pps
+    '''fig = plt.figure(figsize = (35, 20))
+    ppsMatrix = pps.matrix(data[features[1:-1]]).pivot(columns = 'x', index = 'y',  values = 'ppscore')
+    sns.heatmap(ppsMatrix, annot = True)
+    plots_col3.pyplot(fig)'''
+    from PIL import Image
+    image = Image.open('ppscore_heatmap.png')
+    plots_col2.image(image)
+    
