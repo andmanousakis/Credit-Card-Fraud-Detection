@@ -6,8 +6,8 @@ channels:
 dependencies:
   - _libgcc_mutex=0.1=main
   - _openmp_mutex=4.5=1_gnu
-  - ca-certificates=2020.10.14=0
-  - certifi=2020.6.20=py38_0
+  - ca-certificates=2021.7.5=h06a4308_1
+  - certifi=2021.5.30=py38h06a4308_0
   - dbus=1.13.18=hb2f20db_0
   - expat=2.2.10=he6710b0_2
   - fontconfig=2.13.0=h9420a91_0
@@ -51,6 +51,7 @@ dependencies:
   - readline=8.1=h27cfd23_0
   - scikit-learn=0.24.2=py38hdc147b9_0
   - scipy=1.6.3=py38h7b17777_0
+  - seaborn=0.11.2=pyhd3eb1b0_0
   - setuptools=52.0.0=py38h06a4308_0
   - sip=4.19.24=py38he6710b0_0
   - sqlite=3.36.0=hc218d9a_0
@@ -126,7 +127,6 @@ dependencies:
     - pytz==2021.1
     - pyzmq==22.2.1
     - requests==2.26.0
-    - seaborn==0.11.2
     - send2trash==1.8.0
     - six==1.16.0
     - sklearn==0.0
