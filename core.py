@@ -2,8 +2,8 @@
 import numpy as np
 import pandas as pd
 import streamlit as st
-#import seaborn as sns
-#from matplotlib import pyplot as plt
+import seaborn as sns
+from matplotlib import pyplot as plt
 import matplotlib.pyplot as plt
 
 # Importing dataset.
@@ -57,7 +57,7 @@ if navigation == 'Data Description & Cleaning':
     dataInfo = {el:'0' for el in features}
     rows = ['Non-Null Count', 'Missing Values', 'dtype']
     dataInfoDF = pd.DataFrame(dataInfo, index = rows, columns = features)
-    dataInfoDF.loc['Non-Null Count'] = str(data.value_counts(dropna = True).sum())
+    dataInfoDF.loc['Non-Null Count'] = str(data.value_counts().sum())
     dtypes = data[features].dtypes
     dataInfoDF.loc['dtype'] = [str(i) for i in dtypes]
 
